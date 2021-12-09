@@ -11,7 +11,7 @@
 
 namespace pipette
 {
-	int pipe::open(const char* cmdline, bool write = false)
+	int pipe::open(const char* cmdline, bool write)
 	{
 		fp = popen(cmdline, write ? "w" : "r");	// rb & wb are not working for some reason
 		if (!fp) return -1; // return WEXITSTATUS(pclose(fp));
