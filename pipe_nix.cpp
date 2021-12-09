@@ -29,12 +29,12 @@ namespace pipette
 		return 0;
 	}
 
-	size_t pipe::read(uint8_t* buffer, size_t size)
+	size_t pipe::read(uint8_t* buffer, size_t size) const
 	{
         return fread(buffer, 1, size, fp);
     }
 
-	size_t pipe::write(uint8_t* buffer, size_t size)
+	size_t pipe::write(uint8_t* buffer, size_t size) const
 	{
 		return fwrite(buffer, 1, size, fp);
 	}
