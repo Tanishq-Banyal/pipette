@@ -15,7 +15,7 @@ namespace pipette
 	{
 		fp = popen(cmdline, write ? "w" : "r");	// rb & wb are not working for some reason
 		if (!fp) return -1; // return WEXITSTATUS(pclose(fp));
-		fcntl(fileno(fp), F_SETPIPE_SZ, 67108864/*64MB*/);	// Increasing Pipe Buffer
+		//fcntl(fileno(fp), F_SETPIPE_SZ, 67108864/*64MB*/);	// Increasing Pipe Buffer
 		return 0;
 	}
 
