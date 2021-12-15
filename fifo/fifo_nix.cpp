@@ -10,23 +10,26 @@ namespace pipette
 
 int fifo::open(const char* path, const char mode)
 {
-	if (!fp) return mkfifo(path, mode == 'w' ? O_WRONLY : O_RDONLY);
+	if (!fd)
+	{
+		fd = mkfifo(path, mode == 'w' ? O_WRONLY : O_RDONLY);
+	}
 	else return 69;
 }
 
 int fifo::read(void* buf, size_t num) const
 {
-	return std::fread(buf, 1, num, fp);
+	return ::read(fd, buf, num);
 }
 
-int fifo::write(void* buf, size_t num) const
+int fifo::write(const void* buf, size_t num) const
 {
-	return std::fwrite(buf, 1, num, fp);
+	return ::write(fd, buf, num);
 }
 
 int fifo::close()
 {
-	if (fp) return std::fclose(fp);
+	if (fd) return ::close(fd);
 	else return 69;
 }
 
