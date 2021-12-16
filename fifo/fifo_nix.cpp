@@ -13,8 +13,10 @@ int fifo::open(const char* path, const char mode)
 	if (!fd)
 	{
 		fd = mkfifo(path, mode == 'w' ? O_WRONLY : O_RDONLY);
+		if (!fd) return 0;
+		else return 1;
 	}
-	else return 69;
+	else return -1;
 }
 
 int fifo::read(void* buf, size_t num) const

@@ -14,19 +14,19 @@ namespace pipette
 	int pipe::open(const char* cmdline, bool write)
 	{
 		fp = popen(cmdline, write ? "w" : "r");	// rb & wb are not working for some reason
-		if (!fp) return -1; // return WEXITSTATUS(pclose(fp));
+		if (!fp) return 0; // return WEXITSTATUS(pclose(fp));
 		//fcntl(fileno(fp), F_SETPIPE_SZ, 67108864/*64MB*/);	// Increasing Pipe Buffer
-		return 0;
+		else return 1;
 	}
 
 	int pipe::close()
 	{
 		if (fp)
 		{
-			pclose(fp);
+			return pclose(fp);
 			fp = NULL;
 		}
-		return 0;
+		else return 0;
 	}
 
 	size_t pipe::read(uint8_t* buffer, size_t size) const
